@@ -1,0 +1,15 @@
+bobsparadox.seti-black
+CoenraadS.bracket-pair-colorizer
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+Gruntfuggly.todo-tree
+James-Yu.latex-workshop
+mechatroner.rainbow-csv
+mohsen1.prettify-json
+ms-python.python
+ms-vscode.cpptools
+patbenatar.advanced-new-file
+PKief.material-icon-theme
+samuelcolvin.jinjahtml
+yzhang.markdown-all-in-one
+zhuangtongfa.material-theme
