@@ -33,6 +33,9 @@
     "[html]": {
         "editor.tabSize": 2,
     },
+    "[css]": {
+        "editor.tabSize": 2,
+    },
     "todo-tree.tree.showScanModeButton": false,
     "advancedNewFile.exclude": {
         "node_modules": true,
