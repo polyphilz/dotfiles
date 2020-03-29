@@ -1,0 +1,28 @@
+{
+	"name": "seti-black",
+	"displayName": "Seti-Black",
+	"publisher": "bobsparadox",
+	"description": "",
+	"version": "0.0.6",
+	"repository": "https://github.com/bobsparadox/seti-black",
+	"engines": {
+		"vscode": "^1.39.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "Seti Black",
+				"uiTheme": "vs-dark",
+				"path": "./themes/Seti Black-color-theme.json"
+			}
+		]
+	},
+	"__metadata": {
+		"id": "41a02070-98e1-46cb-ae70-71cd21973729",
+		"publisherId": "d2baffaf-92e9-4a3c-9f77-6381c0075425",
+		"publisherDisplayName": "bobsparadox"
+	}
+}
