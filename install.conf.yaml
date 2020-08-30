@@ -10,6 +10,7 @@
     ~/.vimrc: .vimrc
     ~/.zshrc: .zshrc
     ~/.vscode: .vscode
+    ~/.config/alacritty/alacritty.yml: alacritty.yml
 
 - create:
     - ~/.vim/undo-history
