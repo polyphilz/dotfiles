@@ -14,6 +14,13 @@ set nocompatible
 " Turn on syntax highlighting.
 syntax on
 
+" Enable true colors if available
+set termguicolors
+" colorscheme gruvbox
+" Enable italics, Make sure this is immediately after colorscheme
+" https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
+highlight Comment cterm=italic gui=italic
+
 " Show matching braces when text indicator is over them
 set showmatch
 
