@@ -1,0 +1,147 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Setup term for programs to be able to use it
+env:
+  TERM: alacritty
+
+window:
+  padding:
+    x: 15
+    y: 25
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
+
+  # Window decorations
+  decorations: transparent
+
+  # Startup Mode (changes require restart)
+  startup_mode: Windowed
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  history: 5000
+
+  # Scrolling distance multiplier
+  multiplier: 3
+
+font:
+  # Normal font face - Also used to draw glyphs on tmux & VIM
+  normal:
+    family: FuraCode Nerd Font
+    style: Retina
+
+  bold:
+    family: FuraCode Nerd Font
+    style: Bold
+
+  # I don't think Fira Code has an italic version, so I just used 'Light'
+  italic:
+    family: FuraCode Nerd Font
+    style: Light
+
+  # Same with bold italic; just used Bold (have no bold italic for Fira Code)
+  bold_italic:
+    family: FuraCode Nerd Font
+    style: Bold
+
+  # Font size
+  size: 14.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing
+  # I've given in 14 spacing which fits really well with my fonts, you may change it
+  # to your convenience but make sure to adjust 'glyph_offset' appropriately post that
+  offset:
+   x: 0
+   y: 6
+
+  # Note: This requires RESTART
+  # By default when you change the offset above you'll see an issue, where the texts are bottom
+  # aligned with the cursor, this is to make sure they center align.
+  # This offset should usually be 1/2 of the above offset-y being set.
+  glyph_offset:
+   x: 0
+   # Keeping this as half of offset to vertically align the text in cursor
+   y: 3
+
+  # Better font rendering for mac
+  use_thin_strokes: true
+
+# Colors
+colors:
+  # Default colors
+  primary:
+    background: '#282c34'
+    foreground: '#ffffff'
+
+  cursor:
+    cursor: '#ff2600'
+
+  # Normal colors
+  normal:
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
+
+  # Bright colors
+  bright:
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'
+
+selection:
+  # This string contains all characters that are used as separators for "semantic words" in Alacritty.
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+shell:
+  program: /bin/zsh
+  args:
+    - --login
+
+mouse:
+  url:
+    launcher:
+      program: open
+
+    modifiers: Command
+
+# Setup some amazing custom key bindings here - Best thing is you can setup key bindings
+# using Mac's 'command' to control your tmux.
+# A great reference: https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/#make-alacritty-feel-like-iterm2
+#   - TL;DR - Use `xxd -psd` to get character codes
+key_bindings:
+  # Use command + [ - to go to previous tmux window
+  - { key: LBracket, mods: Command, chars: "\x02\x70" }
+  # Use command + ] - to go to previous tmux window
+  - { key: RBracket, mods: Command, chars: "\x02\x6e" }
+  # Use command + 7 - to delete the current tmux window
+  - { key: Key7, mods: Command, chars: "\x02\x26" }
+  # ctrl-^ doesn't work in some terminals like alacritty
+  - { key: Key6, mods: Control, chars: "\x1e" }
+  # Enable scroll up (tmux man, less)
+  - { key: PageUp, mods: Shift, action: ScrollPageUp, mode: ~Alt }
+  # Enable scroll down (tmux man, less)
+  - { key: PageDown, mods: Shift, action: ScrollPageDown, mode: ~Alt }
+  # Move words
+  - { key: H, mods: Option, chars: "\x1bb" }
+  - { key: L, mods: Option, chars: "\x1bf" }
+  - { key: Left, mods: Option, chars: "\x1bb" }
+  - { key: Right, mods: Option, chars: "\x1bf" }
+  - { key: Slash, mods: Command, chars: "\x25\x25" }
