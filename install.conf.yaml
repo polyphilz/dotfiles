@@ -5,12 +5,12 @@
 - clean: ['~']
 
 - link:
+    ~/.config/alacritty/alacritty.yml:
+      path: alacritty/alacritty.yml
+    ~/.config/nvim/init.vim:
+      path: nvim/init.vim
     ~/.tmux.conf: .tmux.conf
     ~/.vim: .vim
     ~/.vimrc: .vimrc
     ~/.zshrc: .zshrc
     ~/.vscode: .vscode
-    ~/.config/alacritty/alacritty.yml: alacritty.yml
-
-- create:
-    - ~/.vim/undo-history
