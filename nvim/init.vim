@@ -20,6 +20,11 @@ syntax enable
 colorscheme onehalfdark
 set background=dark
 
+" Enable line numbers
+let NERDTreeShowLineNumbers=1
+" Make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+let g:NERDTreeWinSize=50 " Width of NERDTree pane
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
@@ -70,6 +75,8 @@ set shiftwidth=2 " One tab is now 2 spaces.
 set shiftround " Always round up to the nearest tab.
 set tabstop=2 " This one is also needed to achieve the desired effect.
 set softtabstop=2 " Enables easy removal of an indentation level.
+
+set mouse=a " Use mouse when absolutely needed
 
 " Try to prevent bad habits like using the arrow keys for movement. This is
 " not the only possible bad habit. For example, holding down the h/j/k/l keys
