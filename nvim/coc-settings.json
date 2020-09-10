@@ -11,6 +11,12 @@
   ],
 
   // Python config
+  "python.venvFolders": [
+    "envs",
+    ".pyenv",
+    ".direnv",
+    "Library/Caches/pypoetry/virtualenvs"
+  ],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true
 }
