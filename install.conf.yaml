@@ -11,6 +11,8 @@
       path: nvim/init.vim
     ~/.config/nvim/coc-settings.json:
       path: nvim/coc-settings.json
+    ~/.hammerspoon/init.lua:
+      path: hammerspoon/init.lua
     ~/.tmux.conf: .tmux.conf
     ~/.vim: .vim
     ~/.vimrc: .vimrc
