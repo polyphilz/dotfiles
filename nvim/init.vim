@@ -27,7 +27,7 @@ autocmd FileType nerdtree setlocal relativenumber
 let g:NERDTreeWinSize=50 " Width of NERDTree pane
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = []
+let g:NERDTreeIgnore = ['\.DS_Store$']
 let g:NERDTreeStatusline = ''
 " Toggle
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
