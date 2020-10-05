@@ -24,10 +24,12 @@ set background=dark
 let NERDTreeShowLineNumbers=1
 " Make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
+" If Vim is opened without arguments, open NERDTree
+autocmd VimEnter * if !argc() | NERDTree | endif
 let g:NERDTreeWinSize=50 " Width of NERDTree pane
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = ['\.DS_Store$']
+let g:NERDTreeIgnore = ['\.DS_Store$', '\.class$']
 let g:NERDTreeStatusline = ''
 " Toggle
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
