@@ -50,7 +50,7 @@ alias cra="create-react-app"
 alias gs="git status"
 alias gaa="git add ."
 alias gcm="git commit -m"
-alias ls="exa --long --header --modified --git --color=always"
+alias ls="exa --long --all --header --modified --git --color=always"
 alias vim="nvim"
 # Google Java Formatter (with --replace to replace file in place)
 alias gjf="java -jar ~/bin/google-java-format-1.9-all-deps.jar --replace"
