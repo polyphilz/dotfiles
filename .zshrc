@@ -54,6 +54,12 @@ alias ls="exa --long --all --header --modified --git --color=always"
 alias vim="nvim"
 # Google Java Formatter (with --replace to replace file in place)
 alias gjf="java -jar ~/bin/google-java-format-1.9-all-deps.jar --replace"
+# Hardware Simulator used for Nand2Tetris projects
+alias n2ths="~/learning/nand2tetris/tools/HardwareSimulator.sh"
+alias n2tcpue="~/learning/nand2tetris/tools/CPUEmulator.sh"
+alias n2ta="~/learning/nand2tetris/tools/Assembler.sh"
+alias n2tvme="~/learning/nand2tetris/tools/VMEmulator.sh"
+alias n2tjc="~/learning/nand2tetris/tools/JackCompiler.sh"
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
@@ -69,3 +75,7 @@ export PATH="/usr/local/lib/python3.7/site-packages/helldiver:$PATH"
 
 # Add kernprof to PATH
 export PATH="/Users/rohan/Library/Python/3.7/bin:$PATH"
+
+# NVM (node version manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
