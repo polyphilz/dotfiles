@@ -9,6 +9,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'ryanoasis/vim-devicons'
+  Plug 'mattn/emmet-vim' " HTML niceness
   Plug 'sonph/onehalf', {'rtp': 'vim/'}
   Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 call plug#end()
@@ -29,7 +30,7 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 let g:NERDTreeWinSize=50 " Width of NERDTree pane
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = ['\.DS_Store$', '\.class$']
+let g:NERDTreeIgnore = ['\.DS_Store$', '\.class$', '\.out$']
 let g:NERDTreeStatusline = ''
 " Toggle
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
@@ -37,6 +38,11 @@ nnoremap <silent> <C-n> :NERDTreeToggle<CR>
 " to convert Command + / to '%%')
 vmap %% <plug>NERDCommenterToggle
 nmap %% <plug>NERDCommenterToggle
+
+" This prevents an annoying thing where the plugin indentLine has conceal set
+" to the value of 2, which hides double quotation marks in JSON and markdown.
+let g:indentLine_setConceal = 2
+let g:indentLine_concealcursor = ""
 
 " coc config
 let g:coc_global_extensions = [
