@@ -149,21 +149,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/rohan/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-   if [ -f "/Users/rohan/miniconda3/etc/profile.d/conda.sh" ]; then
-       . "/Users/rohan/miniconda3/etc/profile.d/conda.sh"
-   else
-       export PATH="/Users/rohan/miniconda3/bin:$PATH"
-   fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 
 # bun completions
 [ -s "/Users/rohan/.bun/_bun" ] && source "/Users/rohan/.bun/_bun"
@@ -174,3 +159,19 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Added by Windsurf
 export PATH="/Users/rohan/.codeium/windsurf/bin:$PATH"
+
+# fid: fast filename finder in ~/Documents using ripgrep
+fid() {
+  if [[ $# -lt 1 ]]; then
+    echo "usage: fid <pattern> [dir]" >&2
+    return 1
+  fi
+  local pattern="$1"
+  local dir="${2:-$HOME/Documents}"
+
+  # list all files, then filter by your pattern (case-insensitive, literal match)
+  rg --hidden --follow --glob '!.git' --files "$dir" 2>/dev/null \
+    | rg -i --fixed-strings -- "$pattern"
+}
+
+export PATH="$HOME/.local/bin:$PATH"

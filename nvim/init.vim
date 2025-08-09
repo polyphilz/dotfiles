@@ -1,5 +1,4 @@
 call plug#begin("~/.vim/plugged")
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'airblade/vim-gitgutter'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'Yggdroot/indentLine'
@@ -44,19 +43,6 @@ nmap %% <plug>NERDCommenterToggle
 let g:indentLine_setConceal = 2
 let g:indentLine_concealcursor = ""
 
-" coc config
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json', 
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-python',
-  \ ]
-" from readme
 " if hidden is not set, TextEdit might fail.
 set hidden
 
