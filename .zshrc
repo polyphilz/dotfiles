@@ -194,57 +194,53 @@ dev() {
   # Create new session with first window named "free"
   tmux new-session -d -s "$name" -n "free"
 
-  # Create remaining windows
-  tmux new-window -t "$name" -n "docker"
-  tmux new-window -t "$name" -n "backend"
-  tmux new-window -t "$name" -n "fe"
-  tmux new-window -t "$name" -n "db-connec"
+  # Create remaining windows (indices 1-4)
+  tmux new-window -t "$name:1" -n "docker"
+  tmux new-window -t "$name:2" -n "backend"
+  tmux new-window -t "$name:3" -n "fe"
+  tmux new-window -t "$name:4" -n "db-connec"
 
-  # Tab 1 (free): split vertically
-  tmux select-window -t "$name:free"
-  tmux split-window -h -t "$name:free"
+  # Tab 1 (free, index 0): split vertically
+  tmux split-window -h -t "$name:0"
   # Pre-fill left pane with agy command (no Enter)
-  tmux send-keys -t "$name:free.0" "agy ."
+  tmux send-keys -t "$name:0.0" "agy ."
 
-  # Tab 2 (docker): complex split layout
+  # Tab 2 (docker, index 1): complex split layout
   # Start with vertical split
-  tmux select-window -t "$name:docker"
-  tmux split-window -h -t "$name:docker"
+  tmux split-window -h -t "$name:1"
   # Split the left pane (pane 0) horizontally
-  tmux split-window -v -t "$name:docker.0"
+  tmux split-window -v -t "$name:1.0"
   # Split the bottom-left pane vertically
-  tmux split-window -h -t "$name:docker.1"
+  tmux split-window -h -t "$name:1.1"
 
   # Tab 2 (docker): cd into backend/ in all panes if it exists, and pre-fill commands
   if [[ -d "backend" ]]; then
-    tmux send-keys -t "$name:docker.0" "cd backend" Enter
-    tmux send-keys -t "$name:docker.1" "cd backend" Enter
-    tmux send-keys -t "$name:docker.2" "cd backend" Enter
-    tmux send-keys -t "$name:docker.3" "cd backend" Enter
+    tmux send-keys -t "$name:1.0" "cd backend" Enter
+    tmux send-keys -t "$name:1.1" "cd backend" Enter
+    tmux send-keys -t "$name:1.2" "cd backend" Enter
+    tmux send-keys -t "$name:1.3" "cd backend" Enter
     # Pre-fill commands (no Enter)
-    tmux send-keys -t "$name:docker.0" "docker compose up"
-    tmux send-keys -t "$name:docker.3" "uv run uvicorn main:app --reload --port 8080"
+    tmux send-keys -t "$name:1.0" "docker compose up"
+    tmux send-keys -t "$name:1.3" "uv run uvicorn main:app --reload --port 8080"
   fi
 
-  # Tab 3 (backend): cd into backend/ if it exists
-  tmux select-window -t "$name:backend"
+  # Tab 3 (backend, index 2): cd into backend/ if it exists
   if [[ -d "backend" ]]; then
-    tmux send-keys -t "$name:backend" "cd backend" Enter
+    tmux send-keys -t "$name:2" "cd backend" Enter
   fi
 
-  # Tab 4 (fe): split vertically, both panes cd into client/ if it exists
-  tmux select-window -t "$name:fe"
-  tmux split-window -h -t "$name:fe"
+  # Tab 4 (fe, index 3): split vertically, both panes cd into client/ if it exists
+  tmux split-window -h -t "$name:3"
   if [[ -d "client" ]]; then
-    tmux send-keys -t "$name:fe.0" "cd client" Enter
-    tmux send-keys -t "$name:fe.1" "cd client" Enter
+    tmux send-keys -t "$name:3.0" "cd client" Enter
+    tmux send-keys -t "$name:3.1" "cd client" Enter
     # Pre-fill left pane with build command (no Enter)
-    tmux send-keys -t "$name:fe.0" "pnpm build && pnpm i && pnpm dev"
+    tmux send-keys -t "$name:3.0" "pnpm build && pnpm i && pnpm dev"
   fi
 
-  # Tab 5 (db-connec): no changes
+  # Tab 5 (db-connec, index 4): no changes
 
   # Select first window and attach
-  tmux select-window -t "$name:free"
+  tmux select-window -t "$name:0"
   tmux attach-session -t "$name"
 }
