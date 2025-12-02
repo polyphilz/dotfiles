@@ -121,6 +121,7 @@ alias oxy-root="ssh -i ~/.ssh/id_rsa root@143.110.239.211"
 alias spg="su rohan -c 'pg_ctl start -D /usr/local/pgsql/data -l serverlog'"
 # Shutdown (kill) postgres server via SIGINT
 alias kpg='kill -INT `head -1 /usr/local/pgsql/data/postmaster.pid`'
+alias ca="cursor-agent"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -175,3 +176,75 @@ fid() {
 }
 
 export PATH="$HOME/.local/bin:$PATH"
+
+alias claude="/Users/rohan/.claude/local/claude"
+
+# Added by Antigravity
+export PATH="/Users/rohan/.antigravity/antigravity/bin:$PATH"
+
+# tmux dev session automation
+dev() {
+  if [[ $# -lt 1 ]]; then
+    echo "usage: dev <session-name>" >&2
+    return 1
+  fi
+
+  local name="$1"
+
+  # Create new session with first window named "free"
+  tmux new-session -d -s "$name" -n "free"
+
+  # Create remaining windows
+  tmux new-window -t "$name" -n "docker"
+  tmux new-window -t "$name" -n "backend"
+  tmux new-window -t "$name" -n "fe"
+  tmux new-window -t "$name" -n "db-connec"
+
+  # Tab 1 (free): split vertically
+  tmux select-window -t "$name:free"
+  tmux split-window -h -t "$name:free"
+  # Pre-fill left pane with agy command (no Enter)
+  tmux send-keys -t "$name:free.0" "agy ."
+
+  # Tab 2 (docker): complex split layout
+  # Start with vertical split
+  tmux select-window -t "$name:docker"
+  tmux split-window -h -t "$name:docker"
+  # Split the left pane (pane 0) horizontally
+  tmux split-window -v -t "$name:docker.0"
+  # Split the bottom-left pane vertically
+  tmux split-window -h -t "$name:docker.1"
+
+  # Tab 2 (docker): cd into backend/ in all panes if it exists, and pre-fill commands
+  if [[ -d "backend" ]]; then
+    tmux send-keys -t "$name:docker.0" "cd backend" Enter
+    tmux send-keys -t "$name:docker.1" "cd backend" Enter
+    tmux send-keys -t "$name:docker.2" "cd backend" Enter
+    tmux send-keys -t "$name:docker.3" "cd backend" Enter
+    # Pre-fill commands (no Enter)
+    tmux send-keys -t "$name:docker.0" "docker compose up"
+    tmux send-keys -t "$name:docker.3" "uv run uvicorn main:app --reload --port 8080"
+  fi
+
+  # Tab 3 (backend): cd into backend/ if it exists
+  tmux select-window -t "$name:backend"
+  if [[ -d "backend" ]]; then
+    tmux send-keys -t "$name:backend" "cd backend" Enter
+  fi
+
+  # Tab 4 (fe): split vertically, both panes cd into client/ if it exists
+  tmux select-window -t "$name:fe"
+  tmux split-window -h -t "$name:fe"
+  if [[ -d "client" ]]; then
+    tmux send-keys -t "$name:fe.0" "cd client" Enter
+    tmux send-keys -t "$name:fe.1" "cd client" Enter
+    # Pre-fill left pane with build command (no Enter)
+    tmux send-keys -t "$name:fe.0" "pnpm build && pnpm i && pnpm dev"
+  fi
+
+  # Tab 5 (db-connec): no changes
+
+  # Select first window and attach
+  tmux select-window -t "$name:free"
+  tmux attach-session -t "$name"
+}

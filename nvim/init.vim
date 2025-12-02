@@ -11,6 +11,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'mattn/emmet-vim' " HTML niceness
   Plug 'sonph/onehalf', {'rtp': 'vim/'}
   Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 if (has("termguicolors"))
@@ -29,7 +30,7 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 let g:NERDTreeWinSize=50 " Width of NERDTree pane
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = ['\.DS_Store$', '\.class$', '\.out$']
+let g:NERDTreeIgnore = ['\.DS_Store', '\.class', '\.out']
 let g:NERDTreeStatusline = ''
 " Toggle
 nnoremap <silent> <C-n> :NERDTreeToggle<CR>
@@ -50,6 +51,7 @@ set hidden
 " # Editor settings
 " =============================================================================
 set encoding=UTF-8
+set clipboard=unnamed " Use system clipboard for yank/paste
 
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
@@ -107,3 +109,34 @@ set signcolumn=yes
 
 " Change character for indent line
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" =============================================================================
+" # Treesitter configuration
+" =============================================================================
+" FOLDING USAGE:
+" - za: Toggle fold under cursor
+" - zM: Close all folds
+" - zR: Open all folds
+" - zc: Close current fold
+" - zo: Open current fold
+" - zj/zk: Jump to next/previous fold
+" - zx: Update folds
+" - [z/]z: Jump to start/end of current fold
+"
+" TROUBLESHOOTING:
+" - If folding doesn't work, run :TSInstall markdown (or relevant language)
+" - Check installed parsers with :TSInstallInfo
+" - Update parsers with :TSUpdate
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "markdown", "vim", "lua" },
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+
+" Enable treesitter-based folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=99  " Start with all folds open
